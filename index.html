@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        input[type="text"], select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Yêu cầu: 1 dòng đen và 1 dòng trắng */
+        /* Dòng lẻ: Màu trắng, chữ đen */
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        /* Dòng chẵn: Màu đen, chữ trắng */
+        tbody tr:nth-child(even) {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Image Styling */
+        .img-container {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .product-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Pagination Styling */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+        .pagination button.active {
+            background-color: #0056b3;
+            font-weight: bold;
+        }
+        
+        .pagination button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="controls">
+        <input type="text" id="searchInput" placeholder="Tìm kiếm theo tên sản phẩm..." style="width: 300px;">
+        
+        <label>Hiển thị: 
+            <select id="pageSizeSelect">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+            </select>
+        </label>
+
+        <div class="sort-buttons">
+            <span>Sắp xếp: </span>
+            <button onclick="sortData('price', 'asc')">Giá tăng</button>
+            <button onclick="sortData('price', 'desc')">Giá giảm</button>
+            <button onclick="sortData('title', 'asc')">Tên A-Z</button>
+            <button onclick="sortData('title', 'desc')">Tên Z-A</button>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th style="width: 30%;">Tên sản phẩm</th>
+                <th>Giá</th>
+                <th style="width: 30%;">Mô tả</th>
+                <th>Hình ảnh</th>
+            </tr>
+        </thead>
+        <tbody id="productTableBody">
+            </tbody>
+    </table>
+
+    <div class="pagination" id="paginationControls">
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
